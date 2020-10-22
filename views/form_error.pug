@@ -1,0 +1,23 @@
+extends layout
+block content 
+    form(method="POST")
+        h2.error Oooops! 
+        ul.error
+            each errMsg in errors
+                li=errMsg
+        p
+            label(for="title") Title 
+            input(class="titleInput" name="title" type="text" id="title" value=currentData.title)
+        p
+            label(for="author") Author 
+            input(name="author" type="text" id="author" value=currentData.author)
+        p
+            label(for="genre") Genre 
+            input(name="genre" type="text" id="genre" value=currentData.genre)
+        p
+            label(for="year") Year 
+            input(name="year" type="text" id="year" value=currentData.year)
+        p
+            input(type="submit" value="Create New Book")
+        p
+            a(class="button" href="/books/") Cancel

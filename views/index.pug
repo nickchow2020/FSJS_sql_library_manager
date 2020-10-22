@@ -1,0 +1,35 @@
+extends layout
+block content
+    p
+        a(class="button" href="/books/new") Create New Book
+    if isHome
+        p
+            a(class="button" href="/books") Back To List
+
+    form(id="search_form" method="GET" action="/books/searches")
+        label(for="search") Search By
+        select(name="dropdown" id="searchType")
+            if isOnSearch 
+                option(value=`${searchType}`)= searchType
+            else
+                each typ in ["Title","Author","Genre","Year"]
+                    option(value=`${typ}`)=typ
+        input(type="text" id="search")
+        input(type="button" id="submitBtn" value="Search") 
+
+    table(id="table")   
+        thead
+            tr 
+                th Title 
+                th Author 
+                th Genre 
+                th Year 
+        tbody(id="tbody") 
+            each book in allBooks 
+                tr 
+                    td 
+                        a(href=`/books/${book.id}`)= book.title 
+                    td=book.author 
+                    td=book.genre 
+                    td=book.year
+    div(id="buttonsWrap")
