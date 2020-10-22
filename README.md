@@ -5,4 +5,4 @@ This is the 8th project of the Full Stack JavaScript TechDegree,build a web appl
 * download this project from github 
 * run npm install 
 * run npm start 
-* to to localhost:3000/
+* visit localhost:3000/
