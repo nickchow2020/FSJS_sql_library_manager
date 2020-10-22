@@ -76,7 +76,7 @@ router.post("/:id",asyncHandler(async (req,res,next)=>{
       // if not error is occurs update the books 
       const bookNeedsUpdate = await Book.findByPk(req.params.id);
       await bookNeedsUpdate.update(req.body);
-      res.render("update_book",{title: "Update Book", currentData: bookNeedsUpdate});
+      res.redirect("/"); // redirect to /books routes
     }catch(err){
       // if error occurs 
       if(err.name === "SequelizeValidationError"){
