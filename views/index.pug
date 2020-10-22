@@ -9,9 +9,9 @@ block content
     form(id="search_form" method="GET" action="/books/searches")
         label(for="search") Search By
         select(name="dropdown" id="searchType")
-            if isOnSearch 
+            if isOnSearch   
                 option(value=`${searchType}`)= searchType
-            else
+            else 
                 each typ in ["Title","Author","Genre","Year"]
                     option(value=`${typ}`)=typ
         input(type="text" id="search")

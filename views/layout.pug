@@ -7,4 +7,6 @@ html
     div#mainContainWrap
       h1= title
       block content
-      script(src="/javascripts/app.js")
+      if useJS
+        script(src="/javascripts/app.js")
+          
