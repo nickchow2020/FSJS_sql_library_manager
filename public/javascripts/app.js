@@ -14,7 +14,7 @@ const pagePerRow = 7; // row per page
 
 if(searchBtn){  // click on search button lead to search route on click 
     searchBtn.addEventListener("click",()=>{
-        const type = searchType.value.toLowerCase(); //lower all the search genre
+        const type = searchType.value; //lower all the search genre
         const searchValue = searchInput.value // get search value 
         location.href = `/books/search/${type}/${searchValue}`; // points to search route 
     })

@@ -36,13 +36,19 @@ router.get("/new",asyncHandler(async (req,res)=>{
 // post /books/new route 
 router.post("/new",asyncHandler(async (req,res)=>{
   try{
-    // create a new books with create()
-    await Book.create(req.body);
+    //making sure the genre value is capitalize
+    const newData = {
+      title: req.body.title , 
+      author: req.body.author,
+      genre: req.body.genre.charAt(0).toUpperCase() + req.body.author.slice(1),
+      year: req.body.year}
+      // create a new books with create()
+    await Book.create(newData);
     res.redirect("/"); // redirect it to /books route
   }catch(err){
     // if error occurs 
     if(err.name === "SequelizeValidationError"){
-      // handler validation error 
+      // handler validation error
       const error = err.errors;
       const errorMessage = error.map(data => data.message) // store all error message
       res.render("form_error",{currentData: req.body,title:"New Book", errors: errorMessage}); // render form_error and display all error message
@@ -101,11 +107,11 @@ router.post("/:id/delete",asyncHandler(async (req,res)=>{
 // display the form search results 
 router.get("/search/:type/:value",asyncHandler(async (req,res)=>{
 
-    const columnValue = req.params.type; // store the search genre  
+    const columnValue = req.params.type; // store the search genre 
     const rowValue = req.params.value;  // store the search value 
-    res.locals.isHome = true; // show the Back to List button
-    res.locals.isOnSearch = true; // show only the search genre on select tags
-    res.locals.searchType = columnValue.charAt(0).toUpperCase() + columnValue.slice(1); // capitalize search genre
+    res.locals.isHome = true; // show the Back to List button 
+    res.locals.isOnSearch = true; // show only the search genre on select tags 
+    res.locals.searchType = columnValue.charAt(0).toUpperCase() + columnValue.slice(1); // capitalize search genre 
     if(columnValue === "title"){
       // handle on search genre with title 
       const searchBook = await Book.findAll({
@@ -119,9 +125,10 @@ router.get("/search/:type/:value",asyncHandler(async (req,res)=>{
       res.render("index",{title:"Books",allBooks:searchBook});
     }else{
       // handle other genre search
+      const searchValue = rowValue.charAt(0).toUpperCase() + rowValue.slice(1) // capitalize the first Letter
       const searchBook = await Book.findAll({
         where :{
-          [columnValue] : `${rowValue}`
+          [columnValue] : `${searchValue}`
         }
       })
   
