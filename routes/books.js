@@ -112,7 +112,6 @@ router.get("/search/:type/:value",asyncHandler(async (req,res)=>{
     res.locals.isHome = true; // show the Back to List button 
     res.locals.isOnSearch = true; // show only the search genre on select tags 
     res.locals.searchType = columnValue.charAt(0).toUpperCase() + columnValue.slice(1); // capitalize search genre 
-    if(columnValue === "title"){
       // handle on search genre with title 
       const searchBook = await Book.findAll({
         where :{
@@ -123,17 +122,6 @@ router.get("/search/:type/:value",asyncHandler(async (req,res)=>{
         }
       })
       res.render("index",{title:"Books",allBooks:searchBook});
-    }else{
-      // handle other genre search
-      const searchValue = rowValue.charAt(0).toUpperCase() + rowValue.slice(1) // capitalize the first Letter
-      const searchBook = await Book.findAll({
-        where :{
-          [columnValue] : `${searchValue}`
-        }
-      })
-  
-      res.render("index",{title:"Books",allBooks:searchBook});
-    }
 }))
 
 module.exports = router;
