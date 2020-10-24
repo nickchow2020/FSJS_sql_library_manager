@@ -108,7 +108,7 @@ router.post("/:id/delete",asyncHandler(async (req,res)=>{
 router.get("/search/:type/:value",asyncHandler(async (req,res)=>{
 
     const columnValue = req.params.type; // store the search genre 
-    const rowValue = req.params.value;  // store the search value 
+    const rowValue = req.params.value.toLowerCase();  // store the search value 
     res.locals.isHome = true; // show the Back to List button 
     res.locals.isOnSearch = true; // show only the search genre on select tags 
     res.locals.searchType = columnValue.charAt(0).toUpperCase() + columnValue.slice(1); // capitalize search genre 
